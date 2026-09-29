@@ -22,19 +22,27 @@ If you try getting this working with different hardware / scanners, consider add
 
 * Currently only tested with:
     * Creality Pika scanner
-    * Intel Lunar Lake platform (system info below)
+    * A Intel Lunar Lake laptop, and a Nvidia based desktop (system info below)
 
 ```yaml
+# System 1 (laptop)
 OS: Fedora Linux 44 (Workstation Edition) x86_64
 Desktop Environment: GNOME 50.5
 CPU: Intel(R) Core(TM) Ultra 7 258V (8) @ 4.80 GHz
 GPU: Arc Graphics 130V/140V GPU @ 1.95 GHz
 Memory: 32GB
+
+# System 2 (desktop)
+OS: Fedora Linux 44 (Workstation Edition) x86_64
+Desktop Environment: KDE Plasma 6.7.5
+CPU: 12th Gen Intel(R) Core(TM) i9-12900K (16+8) @ 5.20 GHz
+GPU 1: NVIDIA GeForce RTX 3080 Lite Hash Rate [Discrete]
+GPU 2: Intel UHD Graphics 770 @ 1.55 GHz [Integrated]
+Memory: 64GB
 ```
 
 * Untested as of now:
-    * AMD and Nvidia GPU systems (integrated, dedicated, hybrid variants)
-        * I have a hybrid RTX 3080 + Intel integrated GPU desktop, I can test with this soon
+    * AMD GPU systems
     * Other Creality scanners
         * I have no others, Sermoon + Scan Bridge might work.
 
@@ -47,9 +55,12 @@ Package names may differ on other distros.
         - Intel GPU (Arc)
             - Fedora: `sudo dnf install intel-compute-runtime`
             - [UNTESTED] Ubuntu: `sudo apt install intel-opencl-icd`
-        - [UNTESTED] Nvidia
-            - Fedora: `sudo dnf install xorg-x11-drv-nvidia-cuda-libs` (`x11` naming is a historical artifact)
-            - Ubuntu: `libnvidia-compute-XXX`, probably already installed as dependency of `nvidia-driver-XXX`
+        - Nvidia
+            - Fedora: `sudo dnf install xorg-x11-drv-nvidia-cuda-libs`
+               - `x11` naming is a historical artifact
+               - Probably already installed as part of `akmod` driver
+            - [UNTESTED] Ubuntu: `libnvidia-compute-XXX`
+               - Probably already installed as dependency of `nvidia-driver-XXX`
         - [UNTESTED] AMD
             - Fedora
                 ```sh
@@ -112,12 +123,12 @@ Package names may differ on other distros.
 
 # Result
 
-I get a very smooth ~60 FPS scanning with blue laser lines (default settings), and fusion + meshing + alignment work as expected and produce a good model. This is double the FPS I get with Windows, for some reason!
+I get a very smooth ~60 FPS scanning with blue laser lines (default settings) with both systems, and fusion + meshing + alignment work as expected and produce a good model. This is double the FPS I get with Windows on my laptop, for some reason!
 
-NIR gets more like 5-10 FPS, but works fine with some patience.
+NIR gets 5-10 FPS on my laptop, but works fine with some patience. Smooth 30 FPS on desktop.
 
 So far, with very limited testing, everything seems stable.
 
-The app's built-in benchmark:
+The app's built-in benchmark, on my laptop:
 
 ![creality-scan-benchmark](screenshot-benchmark-wine.png)
