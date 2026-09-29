@@ -1,7 +1,5 @@
 # Unofficial Linux support information for the Creality Scan desktop app
 
-Note that this is a newer app, different from others like "Creality CR-Scan Lizard".
-
 Currently the official app is Windows-only, but can be easily run with modern Wine versions.
 
 The main tricks to get it actually working for scanning are to:
